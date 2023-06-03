@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvUser.addItemDecoration(itemDecoration)
 
         mainViewModel.listUser.observe(this, { githubUsers ->
-            setReviewData(githubUsers)
+            setUserData(githubUsers)
         })
 
         mainViewModel.isLoading.observe(this, {
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             .into(binding.ivPicture)
     }*/
 
-    private fun setReviewData(githubUsers: List<ItemsItem>) {
+    private fun setUserData(githubUsers: List<ItemsItem>) {
         adapter = ListUserAdapter(githubUsers)
         binding.rvUser.adapter = adapter
     }

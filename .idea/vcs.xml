@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/3rd Semester/IF2111 Algoritma dan Struktur Data STI/ALSTRUKDAT(1) - STI 18/ALSTRUKDAT/TubesIF2111-Chess" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/4th Semester/IF2212 Pemrograman Berorientasi Objek STI/Tugas Besar/HijiUno" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/5th Semester/IF3152 Rekayasa Perangkat Lunak STI/Coursework/Milestone 4/if3152-2021-g23-glabs" vcs="Git" />
