@@ -5,31 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
-
-//    override fun createFragment(position: Int): Fragment {
-//        var fragment: Fragment? = null
-//        when (position) {
-//            0 -> fragment = HomeFragment()
-//            1 -> fragment = ProfileFragment()
-//        }
-//        return fragment as Fragment
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return 2
-//    }
-
+class SectionsPagerAdapter(activity: AppCompatActivity, var username: String) : FragmentStateAdapter(activity) {
     override fun createFragment(position: Int): Fragment {
-        val fragment = FollowersFragment()
+        val fragment = FollowFragment()
         fragment.arguments = Bundle().apply {
-            putInt(FollowersFragment.ARG_SECTION_NUMBER, position + 1)
+            putInt(FollowFragment.ARG_POSITION, position + 1)
+            putString(FollowFragment.ARG_USERNAME, username)
         }
         return fragment
     }
-
     override fun getItemCount(): Int {
         return 2
     }
 }
-

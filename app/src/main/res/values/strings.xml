@@ -3,9 +3,8 @@
 
     <string name="search_hint">Cari user GitHub di sini</string>
     <string name="search">Search</string>
-    <string name="tab_text_1">Home</string>
-    <string name="tab_text_2">Profile</string>
-    <string name="tab_text_3">Setting</string>
+    <string name="tab_text_1">Followers</string>
+    <string name="tab_text_2">Following</string>
     <string name="content_tab_followers">Welcome Home</string>
     <string name="content_tab_profile">Change your Profile here</string>
     <string name="content_tab_text">This is Tab %1$d</string>

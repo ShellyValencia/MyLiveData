@@ -22,8 +22,7 @@ class DetailActivity : AppCompatActivity() {
         @StringRes
         private val TAB_TITLES = intArrayOf(
                 R.string.tab_text_1,
-                R.string.tab_text_2,
-                R.string.tab_text_3
+                R.string.tab_text_2
         )
     }
 
@@ -43,7 +42,7 @@ class DetailActivity : AppCompatActivity() {
             intent.getParcelableExtra(KEY_USER)
         }
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+        val sectionsPagerAdapter = SectionsPagerAdapter(this, dataUser!!.login)
         val viewPager: ViewPager2 = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
