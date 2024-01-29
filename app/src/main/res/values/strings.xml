@@ -3,11 +3,13 @@
 
     <string name="search_hint">Cari user GitHub di sini</string>
     <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="setting">Setting</string>
+    <string name="users_name">Name</string>
     <string name="tab_text_1">Followers</string>
     <string name="tab_text_2">Following</string>
-    <string name="content_tab_followers">Welcome Home</string>
-    <string name="content_tab_profile">Change your Profile here</string>
-    <string name="content_tab_text">This is Tab %1$d</string>
+    <string name="content_tab_follow">This is Tab Follow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

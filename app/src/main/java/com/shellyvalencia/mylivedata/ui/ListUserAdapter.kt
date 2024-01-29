@@ -1,23 +1,19 @@
-package com.shellyvalencia.mylivedata
+package com.shellyvalencia.mylivedata.ui
 
 import android.content.Intent
-import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
-import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import java.util.*
+import com.shellyvalencia.mylivedata.R
+import com.shellyvalencia.mylivedata.data.remote.response.ItemsItem
+import com.shellyvalencia.mylivedata.ui.detail.DetailActivity
 
 class ListUserAdapter(private val listUser: List<ItemsItem>) :
     RecyclerView.Adapter<ListUserAdapter.ViewHolder>() {
-    private lateinit var onItemClickCallback: OnItemClickCallback
-
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
 
     private var filteredListUser = listUser.toMutableList()
 
@@ -40,23 +36,9 @@ class ListUserAdapter(private val listUser: List<ItemsItem>) :
 
     override fun getItemCount() = filteredListUser.size
 
-    fun filter(query: String) {
-        filteredListUser.clear()
-        if (query.isEmpty()) {
-            filteredListUser.addAll(listUser)
-        } else {
-            val filteredItems = listUser.filter { it.login.contains(query, ignoreCase = true) }
-            filteredListUser.addAll(filteredItems)
-        }
-        notifyDataSetChanged()
-    }
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvItem: TextView = view.findViewById(R.id.tvItem)
         val ivPicture: ImageView = view.findViewById(R.id.ivPicture)
     }
 
-    interface OnItemClickCallback {
-        fun onItemClicked(data: ItemsItem)
-    }
 }

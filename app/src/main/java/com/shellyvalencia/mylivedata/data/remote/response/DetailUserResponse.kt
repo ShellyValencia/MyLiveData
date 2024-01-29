@@ -1,4 +1,4 @@
-package com.shellyvalencia.mylivedata
+package com.shellyvalencia.mylivedata.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 

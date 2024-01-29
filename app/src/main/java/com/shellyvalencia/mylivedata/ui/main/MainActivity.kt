@@ -1,19 +1,30 @@
-package com.shellyvalencia.mylivedata
+package com.shellyvalencia.mylivedata.ui.main
 
-import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.shellyvalencia.mylivedata.R
+import com.shellyvalencia.mylivedata.data.remote.response.ItemsItem
 import com.shellyvalencia.mylivedata.databinding.ActivityMainBinding
+import com.shellyvalencia.mylivedata.helper.SettingViewModelFactory
+import com.shellyvalencia.mylivedata.ui.ListUserAdapter
+import com.shellyvalencia.mylivedata.ui.favorite.FavoriteActivity
+import com.shellyvalencia.mylivedata.ui.setting.SettingActivity
+import com.shellyvalencia.mylivedata.ui.setting.SettingPreferences
+import com.shellyvalencia.mylivedata.ui.setting.SettingViewModel
+import com.shellyvalencia.mylivedata.ui.setting.dataStore
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,29 +38,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*mainViewModel.restaurant.observe(this, { restaurant ->
-            setRestaurantData(restaurant)
-        })*/
-
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUser.addItemDecoration(itemDecoration)
 
-        mainViewModel.listUser.observe(this, { githubUsers ->
+        mainViewModel.listUser.observe(this) { githubUsers ->
             setUserData(githubUsers)
-        })
+        }
 
-        mainViewModel.isLoading.observe(this, {
+        mainViewModel.isLoading.observe(this) {
             showLoading(it)
-        })
+        }
 
-        mainViewModel.snackbarText.observe(this, {
-//            Snackbar.make(
-//                    window.decorView.rootView,
-//                    it,
-//                    Snackbar.LENGTH_SHORT
-//            ).show()
+        mainViewModel.snackbarText.observe(this) {
             it.getContentIfNotHandled()?.let { snackBarText ->
                 Snackbar.make(
                     window.decorView.rootView,
@@ -57,26 +59,20 @@ class MainActivity : AppCompatActivity() {
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
-        })
+        }
 
-        /*binding.btnSend.setOnClickListener { view ->
-            mainViewModel.postReview(binding.edReview.text.toString())
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
-        }*/
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        val settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref)).get(
+            SettingViewModel::class.java
+        )
+        settingViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
-
-    private fun showSelectedUser(user: ItemsItem) {
-        Toast.makeText(this, "Kamu memilih " + user.login, Toast.LENGTH_SHORT).show()
-    }
-
-    /*private fun setRestaurantData(restaurant: Restaurant) {
-        binding.tvTitle.text = restaurant.name
-        binding.tvDescription.text = restaurant.description
-        Glide.with(this)
-            .load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
-            .into(binding.ivPicture)
-    }*/
 
     private fun setUserData(githubUsers: List<ItemsItem>) {
         adapter = ListUserAdapter(githubUsers)
@@ -114,5 +110,21 @@ class MainActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favorite -> {
+                val intent = Intent(this, FavoriteActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.setting -> {
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+                true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

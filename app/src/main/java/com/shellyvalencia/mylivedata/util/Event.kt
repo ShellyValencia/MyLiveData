@@ -1,4 +1,4 @@
-package com.shellyvalencia.mylivedata
+package com.shellyvalencia.mylivedata.util
 
 open class Event<out T>(private val content: T) {
 
@@ -18,8 +18,4 @@ open class Event<out T>(private val content: T) {
         }
     }
 
-    /**
-     * Returns the content, even if it's already been handled.
-     */
-    fun peekContent(): T = content
 }

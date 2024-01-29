@@ -1,7 +1,10 @@
-package com.shellyvalencia.mylivedata
+package com.shellyvalencia.mylivedata.ui.detail
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.shellyvalencia.mylivedata.data.remote.response.DetailUserResponse
+import com.shellyvalencia.mylivedata.data.remote.retrofit.ApiConfig
+import com.shellyvalencia.mylivedata.util.Event
 import retrofit2.Callback
 import retrofit2.Call
 import retrofit2.Response

@@ -1,8 +1,8 @@
-package com.shellyvalencia.mylivedata
+package com.shellyvalencia.mylivedata.data.remote.retrofit
 
+import com.shellyvalencia.mylivedata.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,7 +12,7 @@ class ApiConfig {
             val authInterceptor = Interceptor { chain ->
                val req = chain.request()
                val requestHeaders = req.newBuilder()
-                   .addHeader("Authorization", "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")
+                   .addHeader("Authorization", BuildConfig.API_KEY)
                    .build()
                chain.proceed(requestHeaders)
             }

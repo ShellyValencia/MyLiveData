@@ -39,7 +39,7 @@
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/ivPicture"
             card_view:layout_constraintTop_toTopOf="@+id/ivPicture"
-            tools:text="@string/heroes_name" />
+            tools:text="@string/users_name" />
 
         <TextView
             android:id="@+id/tv_item_description"
